@@ -22,3 +22,13 @@ jobs:
           name: zipped-project.zip
           path: |
             Program.cs
+  
+  deploy: 
+   runs-on:  ubuntu-latest
+   needs: delivery
+   steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: zipped-project.zip
+    - name: Display structure of downloaded files
+      run: ls -R
