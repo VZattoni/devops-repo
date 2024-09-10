@@ -22,6 +22,7 @@ jobs:
           name: zipped-project.zip
           path: |
             Program.cs
+            /bin/
   
   deploy: 
    runs-on:  ubuntu-latest
