@@ -1,0 +1,26 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Continuous Delivery
+
+on:
+  push:
+    branches: 
+      - main 
+
+
+jobs:
+  delivery:
+    runs-on: ubunutu-latest
+    steps: 
+      - name: Check out repository code
+        uses: actions/checkout@v4
+    
+      - name: Simulando CD
+        uses: actions/upload-artifact@v4
+        with:
+          name: zipped-project.zip
+          path: |
+            '**.cs'
+            '**.csproj'
+            '**.exe'
