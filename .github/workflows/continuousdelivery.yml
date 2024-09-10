@@ -21,6 +21,4 @@ jobs:
         with:
           name: zipped-project.zip
           path: |
-            '**.cs'
-            '**.csproj'
-            '**.exe'
+            ././bin
