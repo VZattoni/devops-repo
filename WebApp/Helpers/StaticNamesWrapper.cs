@@ -1,8 +1,10 @@
-﻿namespace devops_project.Helpers
+﻿using devops_project.Interfaces;
+
+namespace devops_project.Helpers
 {
-    public static class NamesList
+    public class StaticNamesWrapper : IStaticNamesWrapper
     {
-        public static string[] Names { get; } = 
+        private static string[] Names = 
             {
                 "João",
                 "Maria",
@@ -56,6 +58,9 @@
                 "Clara"
             };
 
-        
+        public string[] GetNamesList()
+        {
+            return Names;
+        }
     }
 }

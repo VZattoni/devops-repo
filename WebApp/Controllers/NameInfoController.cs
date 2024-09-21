@@ -13,11 +13,13 @@ namespace devops_project.Controllers
 
         private readonly ILogger<NameInfoController> _logger;
         private readonly IIbgeService _ibgeService;
+        private readonly IStaticNamesWrapper _staticNamesWrapper;
 
-        public NameInfoController(ILogger<NameInfoController> logger, IIbgeService ibgeService)
+        public NameInfoController(ILogger<NameInfoController> logger, IIbgeService ibgeService, IStaticNamesWrapper staticNamesWrapper)
         {
             _logger = logger;
             _ibgeService = ibgeService;
+            _staticNamesWrapper = staticNamesWrapper;
         }
         [HttpGet("name/{name}")]
         public async Task<IActionResult> GetNameAsync(string name)
@@ -34,12 +36,35 @@ namespace devops_project.Controllers
         [HttpGet("names")]
         public IActionResult GetNames()
         {
-            string[] response = NamesList.Names;
+            string[] response = _staticNamesWrapper.GetNamesList();
             if (response == null)
             {
                 return StatusCode(500);
             }
             return Ok(response);
         }
+
+        [HttpGet("name/concat/{firstName}/{secondName}")]
+        public IActionResult GetConcatNames(string firstName, string secondName)
+        {
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(secondName))
+            {
+                return StatusCode(500);
+            }
+            return Ok(string.Concat(firstName, " ", secondName));
+        }
+
+        [HttpGet("name")]
+        public IActionResult GetName()
+        {
+            string[] namesList = _staticNamesWrapper.GetNamesList();
+            if (namesList == null)
+            {
+                return StatusCode(500);
+            }
+            Random random = new Random();
+            return Ok(namesList.ElementAt(random.Next(1, namesList.Length)));
+        }
+
     }
 }

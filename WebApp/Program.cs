@@ -1,3 +1,4 @@
+using devops_project.Helpers;
 using devops_project.Interfaces;
 using devops_project.Services;
 
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IIbgeService, IbgeService>();
+builder.Services.AddTransient<IStaticNamesWrapper, StaticNamesWrapper>();
 
 var app = builder.Build();
 
