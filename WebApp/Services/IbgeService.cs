@@ -24,10 +24,10 @@ namespace devops_project.Services
             string ibgeEndpointUrl = $"/censos/nomes/{name}";
             string uriString = string.Concat(baseUrlApi, ibgeEndpointUrl);
             _logger.LogInformation($"Starting request to IBGE API: {uriString}");
-            var test = await _httpClient.GetAsync(uriString);
-            if(test.IsSuccessStatusCode)
+            var ibgeReponse = await _httpClient.GetAsync(uriString);
+            if(ibgeReponse.IsSuccessStatusCode)
             {
-                var content = await test.Content.ReadAsStringAsync();
+                var content = await ibgeReponse.Content.ReadAsStringAsync();
                 var json = JsonSerializer.Deserialize<List<NameInfo>>(content, new JsonSerializerOptions {PropertyNameCaseInsensitive = true });
                 _logger.LogInformation(content);
                 List<ResInfo> res = json[0].Res;

@@ -2,6 +2,6 @@
 {
     public interface IStaticNamesWrapper
     {
-        string[] GetNamesList();
+       public string[] GetNamesList();
     }
 }

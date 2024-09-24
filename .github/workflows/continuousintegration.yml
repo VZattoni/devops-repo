@@ -4,6 +4,7 @@
 name: .Release Pipeline
 
 on:
+  workflow_call:  
   push:
     branches: [ "dev" ]
 
